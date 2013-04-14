@@ -2,6 +2,7 @@ import os
 import tornado.ioloop
 import tornado.web
 import tornado.httpserver
+from handlers.pages import IndexHandler 
 
 
 class Application(tornado.web.Application):

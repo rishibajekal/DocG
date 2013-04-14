@@ -1,0 +1,22 @@
+/*---------------------------------
+	LAYOUT
+-----------------------------------*/
+body {
+	margin: 0;
+	padding: 15px;
+	color: #000;
+	background: #bfbfbf url(../img/texture.png);
+}
+
+.main-box {
+    background-color: rgb(191, 191, 191); /* fallback */
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+}
+
+.main-box .title {
+    font-size: 80px;
+    font-weight: 500;
+    padding: 15px;
+    color: inherit;
+}

@@ -3,6 +3,7 @@ import tornado.ioloop
 import tornado.web
 import tornado.httpserver
 from handlers.pages import IndexHandler 
+from handlers.query import QueryHandler
 
 
 class Application(tornado.web.Application):
@@ -13,6 +14,7 @@ class Application(tornado.web.Application):
 
         handlers = [
             tornado.web.URLSpec(r'/', IndexHandler),
+            tornado.web.URLSpec(r'/search', QueryHandler)
 
             # API
         ]

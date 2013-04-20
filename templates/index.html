@@ -9,6 +9,7 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{ static_url('js/bootstrap.min.js') }}"></script>
+    <script src="{{ static_url('js/query.js') }}"></script>
 
     <link rel="stylesheet" href="{{ static_url('css/bootstrap.min.css') }}" media="all" />
     <link rel="stylesheet" href="{{ static_url('css/bootstrap-responsive.min.css') }}" media="all" />
@@ -35,7 +36,7 @@
                     <h1 class="title">AskG</h1>
                     <form class="form-search">
                         <input id="search-box" class="span4 input-xlarge search-query" type="text" placeholder="What is the meaning of life?" autofocus>
-                        <button class="btn btn-primary" type="submit">Go!</button>
+                        <button id="search-btn" class="btn btn-primary" type="submit">Go!</button>
                     </form>
                 </div>
             </div>

@@ -6,10 +6,10 @@ import json
 class QueryHandler(RequestHandler):
 
     def post(self):
-    	self.set_header("Content-Type", "application/json")
-    	postDict = json.loads(self.request.body)
-    	g = GoogleSearchRequest()
-    	q = g.search('pickle')
-    	print 'here: \n'  + q
-    	self.write(json.dumps(q))
-    	self.finish()
+        self.set_header("Content-Type", "application/json")
+        postDict = json.loads(self.request.body)
+        g = GoogleSearchRequest()
+        q = g.search(postDict['query'])
+        print 'HERE: \n' + q
+        self.write(json.dumps(q))
+        self.finish()

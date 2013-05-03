@@ -1,0 +1,19 @@
+{
+    "illnesses":
+    [
+        {
+            "illness": "flu",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Flu"
+            ]
+        },
+        {
+            "illness": "malaria",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Malaria"
+            ]
+        }
+    ]
+}

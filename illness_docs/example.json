@@ -1,15 +1,17 @@
 {
     "documents":
-    [
-        {
-            "term1": 1,
-            "term2": 3,
-            "term3": 4
-        },
-        {
-            "term4": 8,
-            "term6": 2,
-            "term9": 3
-        }
-    ]
+    {
+        "example0":
+            {
+                "term1": 1,
+                "term2": 3,
+                "term3": 4
+            },
+        "example1":
+            {
+                "term4": 8,
+                "term6": 2,
+                "term9": 3
+            }
+    }
 }

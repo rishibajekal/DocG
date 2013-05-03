@@ -6,7 +6,7 @@ import os
 
 class SymptomScraper(object):
 
-    path = os.getcwd() + "/../resources/medical_terms.txt"
+    path = os.path.join(os.path.dirname(__file__), '../resources/medical_terms.txt')
 
     def __init__(self, path=None):
         if path is None:

@@ -1,5 +1,6 @@
 import math
 import redis
+import Queue
 
 class TFIDF(object):
 	def __init__(self):
@@ -34,6 +35,36 @@ class TFIDF(object):
 	def tf_idf(self, term, did):
 		return self.tf(term, did) * self.idf(term)
 
+class TIQuery(object):
+	def __init__(self):
+		self._t = TFIDF()
+
+	def query(self, query_vector, num_query=10):
+		doc_set = set()
+
+		for w in query_vector:
+			for did in self._t.term_docs(w):
+				doc_set.add(did)
+
+		top_dids = Queue.PriorityQueue()
+
+		for did in doc_set:
+			ti_sum = 0.0
+			for w in query_vector:
+				ti_sum = ti_sum + self._t.tf_idf(w, did)
+
+			if ti_sum != 0.0:
+				top_dids.put( (-1 * ti_sum, did) )
+
+		prio_dids  = []
+		for i in xrange(num_query):
+			if top_dids.empty() == False:
+				prio_dids.append(top_dids.get_nowait())
+
+		return [ did_t[1] for did_t in prio_dids]
+
+
+
 def tfidf_test(word):
 	t = TFIDF()
 	print 'Word: ' + word
@@ -43,6 +74,10 @@ def tfidf_test(word):
 		print 'IDF: ' + str(t.idf(word))
 		print 'TF-IDF: ' + str(t.tf_idf(word, did))
 		print ''
+
+	q = TIQuery()
+	for did in q.query('appetite loss chills'.split(' ')):
+		print 'Document found: ' + did
 
 
 if __name__ == "__main__":

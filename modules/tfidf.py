@@ -1,6 +1,7 @@
 import math
 import redis
 import Queue
+from nltk.stem.porter import PorterStemmer
 
 
 class TFIDF(object):
@@ -40,11 +41,13 @@ class TIQuery(object):
     def __init__(self):
         self._t = TFIDF()
         self._r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        self._stemmer = PorterStemmer()
 
     def query(self, query_vector, num_query=10):
         doc_set = set()
+        base_word_vector = [self._stemmer.stem(word) for word in query_vector]
 
-        for w in query_vector:
+        for w in base_word_vector:
             for did in self._t.term_docs(w):
                 doc_set.add(did)
 
@@ -52,7 +55,7 @@ class TIQuery(object):
 
         for did in doc_set:
             ti_sum = 0.0
-            for w in query_vector:
+            for w in base_word_vector:
                 if self._r.exists(self._t.redis_path(w)):
                     ti_sum = ti_sum + self._t.tf_idf(w, did)
 

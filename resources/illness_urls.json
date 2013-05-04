@@ -2,17 +2,74 @@
     "illnesses":
     [
         {
-            "illness": "flu",
+            "illness": "Flu",
             "urls":
             [
-                "http://en.wikipedia.org/wiki/Flu"
+                "http://en.wikipedia.org/wiki/Flu",
+                "http://www.flu.gov/symptoms-treatment/symptoms/"
             ]
         },
         {
-            "illness": "malaria",
+            "illness": "Malaria",
             "urls":
             [
                 "http://en.wikipedia.org/wiki/Malaria"
+            ]
+        },
+        {
+            "illness": "Hypertension",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Hypertension"
+            ]
+        },
+        {
+            "illness": "Hypertension",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Hypertension"
+            ]
+        },
+        {
+            "illness": "Diabetes_mellitus",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Diabetes_Mellitus"
+            ]
+        },
+        {
+            "illness": "Sinusitis",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Sinusitis"
+            ]
+        },
+        {
+            "illness": "Bronchitis",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Bronchitis"
+            ]
+        },
+        {
+            "illness": "Osteoarthritis",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Degenerative_Joint_Disease"
+            ]
+        },
+        {
+            "illness": "Asthma",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Asthma"
+            ]
+        },
+        {
+            "illness": "Depression",
+            "urls":
+            [
+                "http://en.wikipedia.org/wiki/Depression_(mood)"
             ]
         }
     ]

@@ -8,12 +8,11 @@ class InvertedIndexBuilder(object):
         return string.find('.json') != -1
 
     def __process_json(self, json_path):
+        print "Processing JSON in ", json_path
         with open(json_path, 'r') as json_file:
             json_obj = json.load(json_file)
-            print json_obj['documents']
             for did, term_dict in json_obj['documents'].items():
                 for term, term_occur in term_dict.items():
-                    print "Document ID: " + did + " Term: " + term
                     self._r.lpush('term::'+term, did+'|'+str(term_occur))
             return len(json_obj['documents'].keys())
 
@@ -34,7 +33,6 @@ class InvertedIndexBuilder(object):
         for file_name in folder_contents:
             if self.__has_json_ext(file_name):
                 full_file_name = os.path.join(folder_path, file_name)
-                print full_file_name
                 docs_in_json = self.__process_json(full_file_name)
                 total_docs = total_docs + docs_in_json
 

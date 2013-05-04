@@ -1,3 +1,5 @@
+illness_docs/*
+
 *.py[cod]
 
 # C extensions

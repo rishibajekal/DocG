@@ -1,7 +1,10 @@
 import math
 import redis
 import Queue
+import re
 from nltk.stem.porter import PorterStemmer
+from collections import defaultdict
+from collections import Counter
 
 
 class TFIDF(object):
@@ -42,6 +45,7 @@ class TIQuery(object):
         self._t = TFIDF()
         self._r = redis.StrictRedis(host='localhost', port=6379, db=0)
         self._stemmer = PorterStemmer()
+        self._num_split_re = re.compile('[A-Za-z_]+')
 
     def query(self, query_vector, num_query=10):
         doc_set = set()
@@ -70,6 +74,19 @@ class TIQuery(object):
         return [did_t[1] for did_t in prio_dids]
 
 
+    def histQuery(self, query_vector):
+        query_results = self.query(query_vector)
+
+        stripped_query_results = [ re.search(self._num_split_re, did).group(0) for did in query_results ]
+        did_hist = defaultdict(int)
+
+        for strip_did in stripped_query_results:
+            did_hist[strip_did] = did_hist[strip_did] + 1
+        
+        did_counter = Counter(did_hist)
+        return [item for item, count in did_counter.most_common()]
+
+
 def tfidf_test(word):
     t = TFIDF()
     print 'Word: ' + word
@@ -81,7 +98,7 @@ def tfidf_test(word):
         print ''
 
     q = TIQuery()
-    for did in q.query('appetite loss chills'.split()):
+    for did in q.histQuery('bleeding appetite loss'.split()):
         print 'Document found: ' + did
 
 

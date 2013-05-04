@@ -16,9 +16,56 @@ function submitQuery() {
             data: JSON.stringify({'query': searchQuery}),
             dataType: 'json',
             type: 'POST',
-            success: function (resp) { console.log(resp); },
-            error: function () { console.log('error'); }
+            success: function (response) {
+                if (response.success) {
+                    displayResults(response);
+                }
+                else {
+                    displayEmptyResults();
+                }
+            },
+            error: function () {
+                displayError();
+            }
         });
     }
     return false;
+}
+
+function displayEmptyResults() {
+    clearResults();
+
+    var html = "<h3>No illnesses match your symptoms. Please see a doctor for more information.</h3>";
+    insertHtml(html);
+}
+
+function displayError() {
+    clearResults();
+
+    var html = "<h3>An error occurred while searching for your illness. Please try again.</h3>";
+    insertHtml(html);
+}
+
+function displayResults(response) {
+    clearResults();
+
+    var doc_ids = response.data;
+    var html = "<h3>Illnesses matching your symptoms:</h3><ul>";
+    for (var i = 0; i < doc_ids.length; i++) {
+        var did = doc_ids[i];
+        html += "<li><h3>" + did + "</h3></li>";
+    }
+    html += "</ul>";
+
+    insertHtml(html);
+}
+
+function insertHtml(html) {
+    var resultDiv = $("#results");
+    resultDiv.html(html);
+}
+
+function clearResults() {
+    var resultDiv = $("#results");
+    resultDiv.empty();
 }

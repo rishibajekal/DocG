@@ -40,7 +40,3 @@ class DocumentBuilder(object):
     def __write_json_file(self, illness_name, illness_dict):
         f = open(self.directory + illness_name + ".json", "w")
         json.dump(illness_dict, f)
-
-
-sb = DocumentBuilder()
-sb.build_documents()

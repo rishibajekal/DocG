@@ -39,10 +39,35 @@ class TFIDF(object):
     def tf_idf(self, term, did):
         return self.tf(term, did) * self.idf(term)
 
+class TFIDFDocLen(TFIDF):
+    def __init__(self):
+        super(TFIDFDocLen, self).__init__()
+
+    def __avg_doclen(self):
+        return int(self._r.get('avg_doclen'))
+
+    def __get_doclen(self, did):
+        return int(self._r.get('doclen::' + did))
+
+    def tf(self, term, tf_did, b=0.2):
+        final_term_count = 0
+
+        for did_entry in self._r.lrange(self.redis_path(term), 0, -1):
+            did_entry_split = did_entry.split('|')
+
+            did = did_entry_split[0]
+            term_count = int(did_entry_split[1])
+
+            if tf_did == did:
+                final_term_count = term_count
+
+        return float(final_term_count) / \
+        (1 - b +  ( b * ( self.__get_doclen(tf_did) / self.__avg_doclen() ) ) )
+
 
 class TIQuery(object):
     def __init__(self):
-        self._t = TFIDF()
+        self._t = TFIDFDocLen()
         self._r = redis.StrictRedis(host='localhost', port=6379, db=0)
         self._stemmer = PorterStemmer()
         self._num_split_re = re.compile('[A-Za-z_]+')
@@ -78,18 +103,15 @@ class TIQuery(object):
         query_results = self.query(query_vector)
 
         stripped_query_results = [ re.search(self._num_split_re, did).group(0) for did in query_results ]
-        did_hist = defaultdict(int)
 
-        for strip_did in stripped_query_results:
-            did_hist[strip_did] = did_hist[strip_did] + 1
-        
-        did_counter = Counter(did_hist)
+        did_counter = Counter(stripped_query_results)
         return [item for item, count in did_counter.most_common()]
 
 
 def tfidf_test(word):
     t = TFIDF()
     print 'Word: ' + word
+    print t.term_docs(word)
     for did in t.term_docs(word):
         print 'Document: ' + str(did)
         print 'TF: ' + str(t.tf(word, did))
@@ -98,9 +120,9 @@ def tfidf_test(word):
         print ''
 
     q = TIQuery()
-    for did in q.histQuery('bleeding appetite loss'.split()):
+    for did in q.histQuery('coughing and fever'.split()):
         print 'Document found: ' + did
 
 
 if __name__ == "__main__":
-    tfidf_test('appetite')
+    tfidf_test('loss')

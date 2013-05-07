@@ -1,14 +1,11 @@
-# AskG
-A search engine that delivers Google-quality results to Ask.com-style question queries.
+# DocG
+A tool to help people diagnose an illness based on a description of their symptoms.
+Created for [CS 410 - Text Information Systems](http://sifaka.cs.uiuc.edu/course/410s13/index.html) in Spring 2013 at University of Illinois at Urbana-Champaign.
 
 ### Authors
 * Rishi Bajekal - [rishibajekal](http://github.com/rishibajekal)
 * Stephen Lee - [LeeStephen](http://github.com/LeeStephen)
 * Koushik Roy - [Koshroy](http://github.com/Koshroy)
 
-## Background
-A surprisingly large number of average users of search engines have been found to use full English language questions as queries for search engines. For example, to find why one's car is not starting, a layperson may type "Why is my car not starting?". Large-scale search engines, like Google or Bing, may be able to handle this to a certain extent, but struggle to deliver high-quality results when the query becomes a full sentence with multiple clauses.
-
 ## Goal
-The goal of AskG is to decompose a full English language question into optimized queries to ultimately create a better search experience for the average user.
-
+The goal of DocG is for users to receive an instant diagnosis based on a description of their illnesses to get an idea of their possible illness before going to the doctor.

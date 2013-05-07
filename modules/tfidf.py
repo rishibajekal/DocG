@@ -3,7 +3,6 @@ import redis
 import Queue
 import re
 from nltk.stem.porter import PorterStemmer
-from collections import defaultdict
 from collections import Counter
 
 
@@ -39,6 +38,7 @@ class TFIDF(object):
     def tf_idf(self, term, did):
         return self.tf(term, did) * self.idf(term)
 
+
 class TFIDFDocLen(TFIDF):
     def __init__(self):
         super(TFIDFDocLen, self).__init__()
@@ -62,7 +62,7 @@ class TFIDFDocLen(TFIDF):
                 final_term_count = term_count
 
         return float(final_term_count) / \
-        (1 - b +  ( b * ( self.__get_doclen(tf_did) / self.__avg_doclen() ) ) )
+            (1 - b + (b * (self.__get_doclen(tf_did) / self.__avg_doclen())))
 
 
 class TIQuery(object):
@@ -98,11 +98,10 @@ class TIQuery(object):
 
         return [did_t[1] for did_t in prio_dids]
 
-
     def histQuery(self, query_vector):
         query_results = self.query(query_vector)
 
-        stripped_query_results = [ re.search(self._num_split_re, did).group(0) for did in query_results ]
+        stripped_query_results = [re.search(self._num_split_re, did).group(0) for did in query_results]
 
         did_counter = Counter(stripped_query_results)
         return [item for item, count in did_counter.most_common()]

@@ -14,11 +14,17 @@ function showHelpTooltip() {
 
     searchBox.tooltip({
         'trigger':'focus',
-        'placement': 'left',
+        'placement': 'bottom',
         'title': 'Write a description of your symptoms here to get a diagnosis.'
     });
 
-    searchBox.tooltip('show');
+    searchBox.focus(function() {
+        searchBox.tooltip('show');
+        setTimeout(function() {
+            searchBox.tooltip('hide');
+        }, 4000);
+    });
+
 
 }
 

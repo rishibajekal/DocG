@@ -8,10 +8,27 @@ body {
 	background: #bfbfbf url(../img/texture.png);
 }
 
+h1 {
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
+    font-size: 50px;
+    line-height: 70px;
+}
+
+p, h2, h3, h4, h5 {
+    font-family: 'Raleway', Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+ul {
+    list-style-type: none;
+}
+
 .main-box {
     background-color: rgb(191, 191, 191); /* fallback */
     background-color: rgba(0, 0, 0, 0);
     text-align: center;
+    margin: 0 auto;
 }
 
 .main-box .title {
@@ -19,10 +36,13 @@ body {
     font-weight: 500;
     padding: 15px;
     color: inherit;
+    text-align: center;
 }
 
 .result-well {
     border-style: none;
     background-color: rgb(191, 191, 191); /* fallback */
     background-color: rgba(0, 0, 0, 0);
+    margin: 0 auto;
+    text-align: center;
 }

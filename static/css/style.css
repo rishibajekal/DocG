@@ -20,3 +20,9 @@ body {
     padding: 15px;
     color: inherit;
 }
+
+.result-well {
+    border-style: none;
+    background-color: rgb(191, 191, 191); /* fallback */
+    background-color: rgba(0, 0, 0, 0);
+}

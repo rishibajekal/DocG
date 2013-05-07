@@ -6,6 +6,20 @@ function readyFunc() {
         event.preventDefault();
         submitQuery();
     });
+    showHelpTooltip();
+}
+
+function showHelpTooltip() {
+    var searchBox = $("#search-box");
+
+    searchBox.tooltip({
+        'trigger':'focus',
+        'placement': 'left',
+        'title': 'Write a description of your symptoms here to get a diagnosis.'
+    });
+
+    searchBox.tooltip('show');
+
 }
 
 function submitQuery() {

@@ -74,7 +74,7 @@ class TIQuery(object):
 
     def query(self, query_vector, num_query=10):
         doc_set = set()
-        base_word_vector = [self._stemmer.stem(word) for word in query_vector]
+        base_word_vector = [self._stemmer.stem(re.search(self._num_split_re, word).group(0)) for word in query_vector]
 
         for w in base_word_vector:
             for did in self._t.term_docs(w):

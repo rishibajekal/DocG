@@ -7,10 +7,10 @@ init:
 	`which pip` install -r requirements.txt
 
 setup: cleanup
-	python setup.py
+	`which python` setup.py
 
 cleanup:
-	python cleanup.py
+	`which python` cleanup.py
 
 clean:
 	rm -rf dist *egg*

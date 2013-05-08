@@ -38,5 +38,7 @@ class DocumentBuilder(object):
             self.__write_json_file(name, illness_dict)
 
     def __write_json_file(self, illness_name, illness_dict):
+        if not os.path.exists(self.directory):
+            os.makedirs(self.directory)
         f = open(self.directory + illness_name + ".json", "w")
         json.dump(illness_dict, f)
